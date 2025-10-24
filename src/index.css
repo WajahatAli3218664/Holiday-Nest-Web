@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Professional blue theme for visa services */
+    --primary: 217 91% 40%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 217 91% 35%;
+    
+    --secondary: 217 91% 95%;
+    --secondary-foreground: 217 91% 40%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 40%;
+
+    --radius: 0.75rem;
+
+    /* Custom visa theme tokens */
+    --trust-blue: 217 91% 40%;
+    --trust-blue-light: 217 91% 95%;
+    --gold-accent: 38 92% 50%;
+    --success-green: 142 71% 45%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 40%) 0%, hsl(197 71% 48%) 100%);
+  /* lighter hero gradient so background photos remain visible */
+  --gradient-hero: linear-gradient(135deg, hsl(217 91% 40% / 0.35) 0%, hsl(197 71% 48% / 0.35) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(217 91% 98%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(217 91% 40% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(217 91% 40% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(217 91% 40% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(217 91% 40% / 0.15);
+    
+    /* Transitions */
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 240 6% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --primary-hover: 217 91% 65%;
+
+    --secondary: 217 33% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 217 91% 60%;
+    
+    --trust-blue: 217 91% 60%;
+    --trust-blue-light: 217 33% 18%;
+    --gold-accent: 38 92% 50%;
+    --success-green: 142 71% 45%;
+    
+    --sidebar-background: 240 6% 10%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 224 76% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    display: inline-flex;
+    gap: 1rem;
+    animation: marquee 18s linear infinite;
+    will-change: transform;
+  }
+
+  /* radial vignette centered for hero readability */
+  .hero-vignette {
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.7) 100%);
+    mix-blend-mode: multiply;
+  }
+
+  /* fixed full-screen background used for hero parallax */
+  .hero-fixed-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0; /* keep fixed background at the lowest level */
+    will-change: transform, opacity;
+    transform: translate3d(0,0,0) scale(1.02);
+  }
+
+  /* subtle background for WhyChoose section: soft diagonal gradient + faint noise texture */
+  .why-choose-bg {
+    background-image: linear-gradient(135deg, rgba(250,250,252,0.98), rgba(244,247,250,0.98)),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><filter id='noise'><feTurbulence baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23noise)' opacity='0.03' /></svg>");
+    background-repeat: repeat;
+    background-size: auto, 200px 200px;
+  }
+
+  /* Visa carousel styles */
+  .visa-carousel {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+
+  .carousel-item {
+    scroll-snap-align: center;
+    will-change: transform, filter;
+  }
+
+  /* Emphasize the centered card with scale and shadow. We'll rely on the browser's :focus and simple JS to add .active if needed.
+     Provide a default transform so non-centered cards are smaller. */
+  .visa-carousel .carousel-item .visa-card {
+    transform: scale(0.98);
+    filter: blur(0px);
+    transition: transform 300ms ease, filter 300ms ease;
+  }
+
+  .visa-carousel .carousel-item:focus-within .visa-card,
+  .visa-carousel .carousel-item.active .visa-card {
+    transform: scale(1.04);
+    filter: none;
+  }
+
+  /* soft edge fade so side cards feel subdued */
+  .visa-scroll {
+    position: relative;
+  }
+
+  .visa-scroll::before,
+  .visa-scroll::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8%;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .visa-scroll::before { left: 0; background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0)); }
+  .visa-scroll::after { right: 0; background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0)); }
+}
